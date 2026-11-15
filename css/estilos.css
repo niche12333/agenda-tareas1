@@ -1,0 +1,222 @@
+/* ===== Variables de color (tema claro) ===== */
+:root {
+  --fondo: #f4f6fb;
+  --superficie: #ffffff;
+  --texto: #1e293b;
+  --suave: #566478;
+  --acento: #2563eb;
+  --acento-oscuro: #1d4ed8;
+  --acento-texto: #2563eb;
+  --borde: #e2e8f0;
+  --ok: #15803d;
+  --error: #dc2626;
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+body.oscuro {
+  --fondo: #0f172a;
+  --superficie: #1e293b;
+  --texto: #e2e8f0;
+  --suave: #94a3b8;
+  --acento-texto: #60a5fa;
+  --ok: #4ade80;
+  --error: #f87171;
+  --borde: #334155;
+  --sombra: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Base ===== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===== Enlace "Saltar al contenido" (solo visible con el foco) ===== */
+.saltar {
+  position: absolute;
+  left: -9999px;
+}
+.saltar:focus {
+  left: 1rem;
+  top: 1rem;
+  z-index: 10;
+  background-color: var(--superficie);
+  color: var(--texto);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  outline: 3px solid var(--acento);
+}
+
+/* ===== Encabezado y pie ===== */
+.encabezado {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+h1 { color: var(--acento-texto); font-weight: 600; }
+.subtitulo { color: var(--suave); }
+.pie { text-align: center; padding: 2rem; color: var(--suave); font-size: 0.9rem; }
+
+/* ===== Diseño adaptable ===== */
+.layout { padding: 0 2rem; }
+.vista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+.vista[hidden] { display: none; }
+.bloque {
+  flex: 1 1 320px;
+  background-color: var(--superficie);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: var(--sombra);
+  animation: entrada 0.6s ease both;
+}
+.bloque:nth-child(2) { animation-delay: 0.15s; }
+.bloque h2 { margin-bottom: 1rem; }
+#contenido:focus, .bloque h2:focus { outline: none; }
+
+@keyframes entrada {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Barra de navegación (pestañas) ===== */
+.menu { padding: 0 2rem; margin-bottom: 1.5rem; }
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 0.25rem;
+  overflow-x: auto;
+  border-bottom: 2px solid var(--borde);
+}
+.menu a {
+  display: block;
+  white-space: nowrap;
+  padding: 0.6rem 1rem;
+  margin-bottom: -2px;
+  color: var(--suave);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 3px solid transparent;
+  border-radius: 8px 8px 0 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.menu a:hover { color: var(--texto); background-color: var(--superficie); }
+.menu a[aria-current="page"] { color: var(--acento-texto); border-bottom-color: var(--acento); }
+.menu a:focus-visible { outline: 3px solid var(--acento); outline-offset: -3px; }
+
+/* ===== Resumen de materias (Inicio) ===== */
+.materias { list-style: none; display: grid; gap: 0.75rem; }
+.materias a {
+  display: block;
+  padding: 0.9rem 1.25rem;
+  border-left: 4px solid var(--acento);
+  border-radius: 8px;
+  background-color: var(--fondo);
+  color: var(--texto);
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+.materias a:hover { transform: translateY(-4px); }
+.materias a:focus-visible { outline: 3px solid var(--acento); outline-offset: 2px; }
+.materias strong { display: block; color: var(--acento-texto); }
+.materias span { color: var(--suave); font-size: 0.9rem; }
+
+/* ===== Tarjeta de la ficha ===== */
+.tarjeta {
+  border-left: 4px solid var(--acento);
+  background-color: var(--fondo);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s ease;
+}
+.tarjeta:hover { transform: translateY(-4px); }
+.tarjeta h3 { color: var(--acento-texto); }
+.tarjeta p { color: var(--suave); font-size: 0.9rem; }
+.tarjeta blockquote { margin-top: 0.5rem; font-style: italic; }
+
+/* ===== Formularios y botones ===== */
+label { display: block; margin: 0.75rem 0 0.25rem; font-size: 0.9rem; font-weight: 600; }
+
+input[type="text"], input[type="email"] {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid var(--borde);
+  border-radius: 8px;
+  background-color: var(--fondo);
+  color: var(--texto);
+  font-family: inherit;
+}
+input:focus-visible, button:focus-visible {
+  outline: 3px solid var(--acento);
+  outline-offset: 2px;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  background-color: var(--acento);
+  color: #ffffff;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+button:hover { background-color: var(--acento-oscuro); transform: translateY(-2px); }
+form > button[type="submit"] { margin-top: 1rem; }
+
+.fila { display: flex; gap: 0.5rem; }
+
+.mensaje { min-height: 1.5rem; margin-top: 0.5rem; font-size: 0.9rem; }
+.mensaje.error { color: var(--error); }
+.mensaje.ok { color: var(--ok); }
+
+/* ===== Filtros ===== */
+.filtros { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 1rem 0; }
+.filtros button {
+  background-color: transparent;
+  color: var(--texto);
+  border: 1px solid var(--borde);
+}
+.filtros button:hover { background-color: var(--borde); }
+.filtros button.activo { background-color: var(--acento); color: #ffffff; border-color: var(--acento); }
+
+.contador { color: var(--suave); font-size: 0.9rem; margin-bottom: 0.5rem; }
+
+/* ===== Lista de tareas ===== */
+.lista { list-style: none; }
+.tarea, .vacio {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--borde);
+  animation: entrada 0.3s ease both;
+}
+.tarea span { flex: 1; overflow-wrap: anywhere; }
+.tarea.hecha span { text-decoration: line-through; color: var(--suave); }
+.tarea input[type="checkbox"] { width: 1.1rem; height: 1.1rem; accent-color: var(--acento); }
+.tarea button { background-color: transparent; padding: 0.25rem 0.5rem; }
+.tarea button:hover { background-color: var(--borde); }
+.vacio { color: var(--suave); justify-content: center; }
+
+/* ===== Móvil ===== */
+@media (max-width: 600px) {
+  .encabezado, .layout, .menu { padding-left: 1rem; padding-right: 1rem; }
+  .fila { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
